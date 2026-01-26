@@ -30,3 +30,6 @@ php artisan serve
 sudo apk add php83-sqlite3 php83-pdo_sqlite
 
 php -m | grep sqlite
+
+sudo apk add git-lfs
+git lfs install
