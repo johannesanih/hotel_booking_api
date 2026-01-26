@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use Laravel\Sanctum\HasApiTokens;
+
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasApiTokens,HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -44,5 +47,32 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // 🔐 Role helpers
+    public function isCustomer()
+    {
+        return $this->role === 'customer';
+    }
+
+    public function isHotelAdmin()
+    {
+        return $this->role === 'hotel_admin';
+    }
+
+    public function isSuperAdmin()
+    {
+        return $this->role === 'super_admin';
+    }
+
+    // 📌 Relationships
+    public function hotels()
+    {
+        return $this->hasMany(Hotel::class, 'hotel_admin_id');
+    }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
     }
 }

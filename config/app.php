@@ -52,7 +52,8 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'firebase_forwarded_url' => env('FIREBASE_FORWARDED_URL'),
+    'url' => env('APP_URL'),
 
     /*
     |--------------------------------------------------------------------------
