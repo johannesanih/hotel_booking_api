@@ -36,6 +36,10 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public const ROLE_CUSTOMER = 'customer';
+    public const ROLE_HOTEL_ADMIN = 'hotel_admin';
+    public const ROLE_SUPER_ADMIN = 'super_admin';
+
     /**
      * Get the attributes that should be cast.
      *
@@ -52,17 +56,17 @@ class User extends Authenticatable
     // 🔐 Role helpers
     public function isCustomer()
     {
-        return $this->role === 'customer';
+        return $this->role === self::ROLE_CUSTOMER;
     }
 
     public function isHotelAdmin()
     {
-        return $this->role === 'hotel_admin';
+        return $this->role === self::ROLE_HOTEL_ADMIN;
     }
 
     public function isSuperAdmin()
     {
-        return $this->role === 'super_admin';
+        return $this->role === self::ROLE_SUPER+HOTEL_ADMIN;
     }
 
     // 📌 Relationships

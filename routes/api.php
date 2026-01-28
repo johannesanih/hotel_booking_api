@@ -15,6 +15,10 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 });
 
+Route::middleware(['auth:sanctum', 'role:super_admin'])->group(function () {
+    Route::post('/hotels', [HotelController::class, 'store']);
+});
+
 Route::get('/ping', function () {
     return response()->json(['status' => 'api works']);
 });
